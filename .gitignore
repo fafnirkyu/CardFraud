@@ -1,0 +1,14 @@
+# .gitignore (place at project root)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+.venv/
+.env
+mlruns/
+mlflow.db
+/src/model/
+.vscode/
+.DS_Store
+*.log

@@ -1,0 +1,20 @@
+# Core ML
+xgboost==1.7.6
+scikit-learn==1.2.2
+pandas==1.5.3
+numpy==1.23.5
+
+# API serving
+fastapi==0.95.2
+uvicorn[standard]==0.22.0
+pydantic==1.10.7
+
+# Experiment tracking
+mlflow==2.3.2
+
+# AWS / Cloud support
+boto3==1.26.143
+
+# Utilities
+python-dotenv==1.0.0
+joblib==1.2.0
