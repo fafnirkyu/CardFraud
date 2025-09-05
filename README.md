@@ -14,7 +14,7 @@ It demonstrates how to take a real-world imbalanced dataset, train a model, and 
 - **Model Training**
   - Fraud detection model using **XGBoost**.
   - Experiment tracking via **MLflow**.
-  - Performance metrics: precision, recall, F1-score (not just accuracy).
+  - Full evaluation with **precision, recall, F1-score, ROC-AUC, PR-AUC**.
 
 - **Deployment**
   - REST API with **FastAPI**.
@@ -28,7 +28,7 @@ It demonstrates how to take a real-world imbalanced dataset, train a model, and 
 
 ---
 
-## 🗂️ Project Structure
+## 📝 Project Structure
 ```
 mlops-churn/
 │── data/               # (not included in repo) dataset storage
@@ -58,7 +58,7 @@ cd CardFraud
 ### 2. Create virtual environment
 ```bash
 python -m venv .env
-source .env/bin/activate  # Linux/Mac
+source .env/bin/activate  # Linux/Mac/SSH
 .env\Scripts\activate     # Windows
 ```
 
@@ -70,14 +70,31 @@ pip install -r requirements.txt
 ---
 
 ## 🚀 Training the Model
+
+From the **SSH terminal** (or VM console):
+
 ```bash
+cd ~/CardFraud
+source .env/bin/activate
 python src/train.py
 ```
 
-- Tracks experiments with MLflow  
+- Automatically tracks experiments with **MLflow**  
 - Logs metrics and model artifacts to `mlruns/`
 
+### Example Metrics (Credit Card Fraud Model)
+
+| Metric       | Value    |
+|-------------|---------|
+| Accuracy    | 0.9995  |
+| Precision   | 0.8737  |
+| Recall      | 0.8469  |
+| F1-Score    | 0.8601  |
+| ROC AUC     | 0.9794  |
+| PR AUC      | 0.8746  |
+
 Run MLflow UI locally:
+
 ```bash
 mlflow ui --host 0.0.0.0 --port 5000
 ```
@@ -85,18 +102,24 @@ mlflow ui --host 0.0.0.0 --port 5000
 ---
 
 ## 🌐 Running the API
+
 ### Local (without Docker):
 ```bash
 uvicorn src.api:app --reload --host 0.0.0.0 --port 8000
 ```
 
-### With Docker:
+### With Docker (locally or on AWS EC2):
 ```bash
-docker-compose up --build
+docker-compose up --build -d
 ```
 
-The API will be available at:  
-👉 `http://localhost:8000/docs`
+- **FastAPI endpoint:** `http://<VM_or_EC2_IP>:8000/docs`  
+- **MLflow tracking UI:** `http://<VM_or_EC2_IP>:5000`
+
+> ✅ AWS Deployment Example:  
+> - EC2 instance (free tier) with Docker installed  
+> - `docker-compose` runs API + MLflow  
+> - Accessible from your public EC2 IP for demos or resume showcase
 
 ---
 
@@ -124,35 +147,42 @@ Response:
 - **XGBoost** — fraud detection model
 - **MLflow** — experiment tracking
 - **Docker** — containerization
-- **GitHub Actions** (ready for CI/CD)
+- **AWS EC2 (optional)** — cloud deployment
+- **GitHub Actions** — CI/CD ready
 
 ---
 
 ## 📦 Deployment Options
-- **Local** with Docker + FastAPI
-- **Cloud**:  
-  - AWS (ECS/EKS, S3 for artifacts, RDS for DB)  
-  - GCP (Cloud Run, Vertex AI)  
-  - Render / Railway / Heroku (simple hosting option)
+- **Local** with Docker + FastAPI + MLflow  
+- **Cloud / Resume-ready showcase**:
+  - AWS EC2 (Docker + docker-compose)
+  - GCP Cloud Run / Vertex AI
+  - Render / Railway / Heroku (quick deployment)
 
 ---
 
 ## 📌 Notes
 - Dataset (`creditcard.csv`) is **not included** in the repo (too large).  
-  You can download it from [Kaggle — Credit Card Fraud Detection](https://www.kaggle.com/mlg-ulb/creditcardfraud).  
+  Download from [Kaggle — Credit Card Fraud Detection](https://www.kaggle.com/mlg-ulb/creditcardfraud).  
   Place it inside `data/creditcard.csv` before training.
-- Use `.gitignore` to avoid committing datasets or model artifacts.
+- `.gitignore` prevents committing datasets or model artifacts.
 
 ---
 
 ## ✨ Deliverable
 > **End-to-End MLOps Pipeline:**  
-> Trained **fraud detection model** with ~99% ROC-AUC,  
-> deployed via **FastAPI + Docker**,  
-> tracked with **MLflow**,  
-> and production-ready for cloud deployment.
+> Trained **fraud detection model** with:
+> - Accuracy: 0.9995  
+> - Precision: 0.8737  
+> - Recall: 0.8469  
+> - F1-Score: 0.8601  
+> - ROC-AUC: 0.9794  
+> - PR-AUC: 0.8746  
+>
+> Deployed via **FastAPI + Docker**, tracked with **MLflow**, and production-ready for cloud deployment (AWS, GCP, or Render).  
 
 ---
 
 ## 📜 License
 MIT License — free to use and modify.
+
