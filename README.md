@@ -31,13 +31,11 @@ It demonstrates how to take a real-world imbalanced dataset, train a model, and 
 ## 📝 Project Structure
 ```
 mlops-churn/
-│── data/               # (not included in repo) dataset storage
-│── notebooks/          # Jupyter notebooks for EDA
+│── data/               # (not included in repo) dataset storage        # Jupyter notebooks for EDA
 │── src/
-│   ├── train.py        # Training script with MLflow tracking
-│   ├── preprocess.py   # Data cleaning & feature engineering
-│   ├── inference.py    # Prediction utilities
-│   └── api.py          # FastAPI app for serving predictions
+│   ├── app/
+        └── main.py # main script       
+│   └── train.py   # Training script with MLflow tracking
 │── Dockerfile          # Container setup
 │── docker-compose.yml  # Local testing with MLflow + API
 │── requirements.txt    # Python dependencies
