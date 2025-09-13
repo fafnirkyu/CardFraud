@@ -1,4 +1,3 @@
-# src/app/main.py
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import xgboost as xgb
@@ -10,7 +9,6 @@ MODEL_PATH = os.getenv("MODEL_PATH", "/app/model/model.json")
 app = FastAPI(title="Churn predictor")
 
 class Features(BaseModel):
-    # create dynamic fields or a single list/ dict depending on your schema
     features: dict
 
 model = None
