@@ -1,4 +1,3 @@
-# src/train.py
 import os
 import pandas as pd
 import numpy as np
@@ -18,7 +17,6 @@ from sklearn.metrics import (
     confusion_matrix,
 )
 
-# MLflow config
 MLFLOW_TRACKING_URI = os.getenv("MLFLOW_TRACKING_URI", "http://localhost:5000")
 mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
 mlflow.set_experiment("fraud_detection_experiment")
